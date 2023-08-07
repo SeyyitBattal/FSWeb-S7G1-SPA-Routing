@@ -1,4 +1,5 @@
 import React from "react";
+import FilmCard from "./FilmCard";
 
 export default function FilmListesi(props) {
   const { movieList } = props;
@@ -23,6 +24,7 @@ function FilmDetayları(props) {
       <div className="movie-metascore">
         Metascore: <strong>{metascore}</strong>
       </div>
+      <FilmCard movie={props.movie} />
     </div>
   );
 }
