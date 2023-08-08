@@ -33,17 +33,20 @@ export default function App() {
 
   const KaydedilenlerListesineEkle = (id) => {
     // Burası esnek. Aynı filmin birden fazla kez "saved" e eklenmesini engelleyin
+    console.log("saved ", id);
+    if (saved.find((movie) => movie.id == id)) {
+      console.log("Bu film listenizde");
+      return;
+    } else {
+      const movietoAdd = movieList.find((movie) => movie.id == id);
+      console.log("movietoAdd", movietoAdd);
+      setSaved([...saved, movietoAdd]);
+    }
   };
 
   return (
     <div>
-      <KaydedilenlerListesi
-        list={
-          [
-            /* Burası esnek */
-          ]
-        }
-      />
+      <KaydedilenlerListesi list={[...saved]} />
       {errorMsg && <h1>Network Hatası</h1>}
       {loading && <p>Yükleniyor...</p>}
       <Switch>
@@ -51,7 +54,7 @@ export default function App() {
           Anasayfadasınız {!loading && <FilmListesi movieList={movieList} />}
         </Route>
         <Route path="/filmler/:id">
-          <Film />
+          <Film kayitEkle={KaydedilenlerListesineEkle} />
         </Route>
         <Route path="/filmler">
           Filmler Sayfasındasınız <FilmListesi movieList={movieList} />
