@@ -4,6 +4,7 @@ import KaydedilenlerListesi from "./Filmler/KaydedilenlerListesi";
 import FilmListesi from "./Filmler/FilmListesi";
 import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
+import Film from "./Filmler/Film";
 
 export default function App() {
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
@@ -47,10 +48,13 @@ export default function App() {
       {loading && <p>Yükleniyor...</p>}
       <Switch>
         <Route path="/" exact>
-          {!loading && <FilmListesi movieList={movieList} />}
+          Anasayfadasınız {!loading && <FilmListesi movieList={movieList} />}
         </Route>
-        <Route path="/filmler/:filmID" exact>
-          <KaydedilenlerListesi />
+        <Route path="/filmler/:id">
+          <Film />
+        </Route>
+        <Route path="/filmler">
+          Filmler Sayfasındasınız <FilmListesi movieList={movieList} />
         </Route>
       </Switch>
     </div>
